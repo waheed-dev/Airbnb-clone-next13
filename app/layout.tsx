@@ -2,8 +2,8 @@ import React from "react";
 import {Nunito} from 'next/font/google'
 import './globals.css'
 import Navbar from "@/app/components/navbar/Navbar";
-import Modal from "@/app/components/modals/modal";
 import RegisterModal from "@/app/components/modals/RegisterModal";
+import ToasterProvider from "@/app/providers/ToasterProvider";
 export const metadata = {
   title: 'Air bnb clone',
   description: 'Air bnb clone with next js 13',
@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
+      <ToasterProvider/>
       <RegisterModal/>
       <Navbar/>
       {children}
