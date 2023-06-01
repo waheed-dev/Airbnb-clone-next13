@@ -6,6 +6,7 @@ import {useState} from "react";
 import {log} from "util";
 import Modal from "@/app/components/modals/modal";
 import Heading from "@/app/Heading";
+import Input from "@/app/components/inputs/input";
 const RegisterModal = () => {
   const registerModal = useRegisterModal()
   const [isLoading,setIsLoading] = useState(false)
@@ -34,7 +35,7 @@ const RegisterModal = () => {
   const bodyContent = (
       <div className={'flex flex-col gap-4'}>
         <Heading title={'welcome to Airbnb'} subtitle={'create an account'} />
-        <input/>
+        <Input register={register} label={'Email'} id={'email'} disabled={isLoading} errors={errors} required/>
       </div>
   )
 
