@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from "@/app/components/navbar/Navbar";
 import RegisterModal from "@/app/components/modals/RegisterModal";
 import ToasterProvider from "@/app/providers/ToasterProvider";
+import LoginModal from "@/app/components/modals/LoginModal";
 export const metadata = {
   title: 'Air bnb clone',
   description: 'Air bnb clone with next js 13',
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
       <ToasterProvider/>
+      <LoginModal/>
       <RegisterModal/>
       <Navbar/>
       {children}
