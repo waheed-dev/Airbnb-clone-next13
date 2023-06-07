@@ -3,8 +3,16 @@ import Container from "@/app/components/Container";
 import Logo from "@/app/components/navbar/Logo";
 import Search from "@/app/components/navbar/Search";
 import UserMenu from "@/app/components/navbar/UserMenu";
+import React from "react";
+import {User} from "@prisma/client";
+import Categories from "@/app/components/Categories";
 
-const Navbar = () => {
+interface NavbarProps {
+    currentUser?: User | null
+}
+
+const Navbar : React.FC<NavbarProps> = ({currentUser}) => {
+    console.log(currentUser)
     return (
         <div className={'fixed w-full bg-white z-10 shadow-sm'}>
             <div className={'py-4 border-b-[1px]'}>
@@ -12,11 +20,11 @@ const Navbar = () => {
                     <div className={'flex flex-row items-center justify-between gap-3 md:gap-0'}>
                         <Logo/>
                         <Search/>
-                        <UserMenu/>
+                        <UserMenu currentUser={currentUser}/>
                     </div>
                 </Container>
             </div>
-
+            <Categories/>
         </div>
     )
 }
