@@ -6,6 +6,7 @@ import RegisterModal from "@/app/components/modals/RegisterModal";
 import ToasterProvider from "@/app/providers/ToasterProvider";
 import LoginModal from "@/app/components/modals/LoginModal";
 import getCurrentUser from "@/app/actions/getCurrentUser";
+import RentModal from "@/app/components/modals/RentModal";
 export const metadata = {
   title: 'Air bnb clone',
   description: 'Air bnb clone with next js 13',
@@ -24,6 +25,7 @@ export default async function RootLayout({
       <body className={font.className}>
       <ToasterProvider/>
       <LoginModal/>
+      <RentModal/>
       <RegisterModal/>
       <Navbar currentUser={currentUser}/>
       {children}

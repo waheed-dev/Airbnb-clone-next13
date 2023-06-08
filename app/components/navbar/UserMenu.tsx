@@ -1,26 +1,35 @@
 'use client'
 import {AiOutlineMenu} from "react-icons/ai";
 import Avatar from "@/app/components/Avatar";
-import React, {useState} from "react";
+import React, {useCallback, useState} from "react";
 import MenuItem from "@/app/components/navbar/MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import {User} from "@prisma/client";
 import {signOut} from "next-auth/react";
+import rentModal from "@/app/components/modals/RentModal";
+import useRentModal from "@/app/hooks/useRentModal";
 interface UserMenuProps {
 currentUser? : User | null
 }
 const UserMenu : React.FC<UserMenuProps> = ({currentUser}) => {
     const registerUser = useRegisterModal()
     const loginUser = useLoginModal()
+    const rentModal = useRentModal()
     const [isOpen, setIsOpen] = useState(false)
     const toggle = () => {
         setIsOpen((value) => !value)
     }
+    const onRent = useCallback(() => {
+        if (!currentUser) {
+            return loginUser.onOpen()
+        }
+        rentModal.onOpen()
+    },[currentUser, loginUser, rentModal])
     return (
         <div className={'relative'}>
             <div className={'flex flex-row items-center gap-3'}>
-                <div onClick={() => console.log('clicked')}
+                <div onClick={onRent}
                      className={'hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer'}>
                     Air bnb your home
                 </div>
@@ -29,7 +38,6 @@ const UserMenu : React.FC<UserMenuProps> = ({currentUser}) => {
                     <AiOutlineMenu/>
                     <div className={'hidden md:block'}>
                         <Avatar src={currentUser?.image} />
-
                     </div>
                 </div>
             </div>
@@ -44,7 +52,7 @@ const UserMenu : React.FC<UserMenuProps> = ({currentUser}) => {
                                     <MenuItem onClick={() => {}} label={'My favourites'}/>
                                     <MenuItem onClick={() => {}} label={'My reservations'}/>
                                     <MenuItem onClick={() => {}} label={'My properties'}/>
-                                    <MenuItem onClick={() => {}} label={'Airbnb my home'}/>
+                                    <MenuItem onClick={() => {rentModal.onOpen()}} label={'Airbnb my home'}/>
                                     <hr/>
                                     <MenuItem onClick={signOut} label={'Logout'}/>
                                 </>
