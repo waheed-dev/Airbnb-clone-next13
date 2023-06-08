@@ -7,7 +7,7 @@ import {categories} from "@/app/components/Categories";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
 import {FieldValues, useForm} from "react-hook-form";
 import CountrySelect from "@/app/components/inputs/ContrySelect";
-import Map from '@/app/components/Map'
+import dynamic from "next/dynamic";
 enum STEPS {
     CATEGORY = 0,
     LOCATION = 1,
@@ -50,7 +50,7 @@ const RentModal = () => {
     const onNext = () => {
         setStep((value) => value+1)
     }
-    const acionLabel = useMemo(() => {
+    const actionLabel = useMemo(() => {
         if (step === STEPS.PRICE) {
             return 'Create'
         }
@@ -62,6 +62,9 @@ const RentModal = () => {
         }
         return 'Back'
     },[step])
+    const Map = useMemo(() => dynamic(() => import('@/app/components/Map'),{
+        ssr : false
+    }),[location])
     const rentModal = useRentModal()
     let bodyContent =( <div className={'flex flex-col gap-5'}>
             <Heading title={'Which of these best describes your place'} subtitle={'pick a category'}/>
@@ -78,13 +81,13 @@ const RentModal = () => {
             <div className={'flex flex-col gap-8'}>
                 <Heading title={'Where is your place located'} subtitle={'help guests find you'}/>
                 <CountrySelect value={location} onChange={(value) => setCustomValue('location',value)}/>
-                <Map/>
+                <Map center={location?.latLng}/>
             </div>
         )
     }
 
     return <Modal title={'Airbnb your home!'} isOpen={rentModal.isOpen} onSubmit={onNext}
-                  actionLabel={acionLabel} secondaryActionLabel={secondaryActionLabel} body={bodyContent} secondaryAction={step=== STEPS.CATEGORY ? undefined : onBack} onClose={rentModal.onClose}/>
+                  actionLabel={actionLabel} secondaryActionLabel={secondaryActionLabel} body={bodyContent} secondaryAction={step=== STEPS.CATEGORY ? undefined : onBack} onClose={rentModal.onClose}/>
 }
 
 export default RentModal
