@@ -6,7 +6,8 @@ import Heading from "@/app/Heading";
 import {categories} from "@/app/components/Categories";
 import CategoryInput from "@/app/components/inputs/CategoryInput";
 import {FieldValues, useForm} from "react-hook-form";
-
+import CountrySelect from "@/app/components/inputs/ContrySelect";
+import Map from '@/app/components/Map'
 enum STEPS {
     CATEGORY = 0,
     LOCATION = 1,
@@ -33,6 +34,7 @@ const RentModal = () => {
         }
     })
     const category = watch('category')
+    const location = watch('location')
 
     const setCustomValue = (id :string,value : any) => {
         setValue(id,value,{
@@ -71,8 +73,17 @@ const RentModal = () => {
             ))}
         </div>
         </div>)
+    if (step === STEPS.LOCATION) {
+        bodyContent = (
+            <div className={'flex flex-col gap-8'}>
+                <Heading title={'Where is your place located'} subtitle={'help guests find you'}/>
+                <CountrySelect value={location} onChange={(value) => setCustomValue('location',value)}/>
+                <Map/>
+            </div>
+        )
+    }
 
-    return <Modal title={'Airbnb your home!'} isOpen={rentModal.isOpen} onSubmit={rentModal.onClose}
+    return <Modal title={'Airbnb your home!'} isOpen={rentModal.isOpen} onSubmit={onNext}
                   actionLabel={acionLabel} secondaryActionLabel={secondaryActionLabel} body={bodyContent} secondaryAction={step=== STEPS.CATEGORY ? undefined : onBack} onClose={rentModal.onClose}/>
 }
 
