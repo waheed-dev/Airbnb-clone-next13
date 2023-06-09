@@ -8,6 +8,7 @@ import CategoryInput from "@/app/components/inputs/CategoryInput";
 import {FieldValues, useForm} from "react-hook-form";
 import CountrySelect from "@/app/components/inputs/ContrySelect";
 import dynamic from "next/dynamic";
+import Counter from "@/app/components/inputs/Counter";
 enum STEPS {
     CATEGORY = 0,
     LOCATION = 1,
@@ -35,7 +36,9 @@ const RentModal = () => {
     })
     const category = watch('category')
     const location = watch('location')
-
+    const guestCount = watch('guestCount')
+    const roomCount = watch('roomCount')
+    const bathroomCount = watch('bathroomCount')
     const setCustomValue = (id :string,value : any) => {
         setValue(id,value,{
             shouldDirty : true,
@@ -57,7 +60,7 @@ const RentModal = () => {
         return 'Next'
     },[step])
     const secondaryActionLabel = useMemo(() => {
-        if (step === STEPS.INFO) {
+        if (step === STEPS.CATEGORY) {
             return undefined
         }
         return 'Back'
@@ -82,6 +85,18 @@ const RentModal = () => {
                 <Heading title={'Where is your place located'} subtitle={'help guests find you'}/>
                 <CountrySelect value={location} onChange={(value) => setCustomValue('location',value)}/>
                 <Map center={location?.latLng}/>
+            </div>
+        )
+    }
+    if (step === STEPS.INFO) {
+        bodyContent = (
+            <div className={'flex flex-col gap-8'}>
+                <Heading title={'Share some basics about your place'} subtitle={'What amenities do u have?'}/>
+                <Counter title={'Guests'} onChange={(value) => setCustomValue('guestCount',value)} subTitle={'How many guest do u allows?'} value={guestCount}/>
+                <hr/>
+                <Counter title={'Rooms'} onChange={(value) => setCustomValue('roomCount',value)} subTitle={'How many rooms do u have?'} value={roomCount}/>
+                <hr/>
+                <Counter title={'Bathroom'} onChange={(value) => setCustomValue('bathroomCount',value)} subTitle={'How many bathrooms do u have?'} value={bathroomCount}/>
             </div>
         )
     }
