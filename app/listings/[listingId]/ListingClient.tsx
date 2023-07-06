@@ -61,7 +61,7 @@ const ListingClient: React.FC<ListingClientProps> = ({listing,reservations = [],
         }).then(r => {
             toast.success('Listing Reserved')
             setDateRange(initialDateRange)
-            router.refresh()
+            router.push('/trips')
         }).catch((e) => {
             toast.error('something went wrong!')
         }).finally(() => {
