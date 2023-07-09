@@ -10,7 +10,7 @@ import ListingsCard from "@/app/components/listings/ListingsCard";
 
 interface PropertiesClientProps {
   listings: Listing[];
-  currentUser?: User | null;
+  currentUser: User | null;
 }
 
 const PropertiesClient: React.FC<PropertiesClientProps> = ({
