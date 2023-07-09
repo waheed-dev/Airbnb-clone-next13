@@ -6,7 +6,7 @@ import React from "react";
 
 interface FavoritesClientProps {
   listings: Listing[];
-  currentUser?: User | null;
+  currentUser: User | null;
 }
 
 const FavouritesClient: React.FC<FavoritesClientProps> = ({
