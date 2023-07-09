@@ -25,6 +25,7 @@ interface LisitingInfoProps {
 const ListingInfo : React.FC<LisitingInfoProps> = ({roomCount,guestCount,bathroomCount,description,locationValue,user,category}) => {
     const {getByValue} = useCountries()
     const coordinates = getByValue(locationValue)?.latLng
+
     return (
         <div className={'col-span-4 flex flex-col gap-8 '}>
             <div className={'flex flex-col gap-2 '}>
@@ -39,7 +40,9 @@ const ListingInfo : React.FC<LisitingInfoProps> = ({roomCount,guestCount,bathroo
                 </div>
             </div>
                 <hr/>
+
             {category && (
+                // @ts-ignore
                 <ListingCategory icon={category.icon} description={category.description} label={category.label}/>
             )}
             <hr/>
