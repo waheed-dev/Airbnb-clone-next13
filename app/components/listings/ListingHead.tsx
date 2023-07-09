@@ -9,7 +9,7 @@ interface ListingHeadProps {
     locationValue : string
     imageSrc : string
     id : string
-    currentUser? : User | null
+    currentUser : User | null
 }
 
 const ListingHead : React.FC<ListingHeadProps> = ({currentUser,id,title,imageSrc,locationValue}) => {
