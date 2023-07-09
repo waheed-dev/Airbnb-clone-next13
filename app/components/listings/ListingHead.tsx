@@ -42,4 +42,4 @@ const ListingHead: React.FC<ListingHeadProps> = ({
     </>
   );
 };
-export default ListingHead
+export default ListingHead;

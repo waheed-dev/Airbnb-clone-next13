@@ -10,7 +10,7 @@ import ListingsCard from "@/app/components/listings/ListingsCard";
 
 interface TripsClientProps {
   reservations: Reservation[];
-  currentUser?: User | null;
+  currentUser: User | null;
 }
 
 const TripsClient: React.FC<TripsClientProps> = ({
@@ -49,6 +49,7 @@ const TripsClient: React.FC<TripsClientProps> = ({
         {reservations.map((reservation) => (
           <ListingsCard
             key={reservation.id}
+            // @ts-ignore
             data={reservation.listing}
             reservation={reservation}
             actionId={reservation.id}

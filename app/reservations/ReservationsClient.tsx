@@ -11,7 +11,7 @@ import ListingsCard from "@/app/components/listings/ListingsCard";
 
 interface ReservationsClientProps {
     reservations : Reservation[]
-    currentUser? : User | null
+    currentUser : User | null
 }
 
 const ReservationsClient : React.FC<ReservationsClientProps> = ({currentUser,reservations}) => {
