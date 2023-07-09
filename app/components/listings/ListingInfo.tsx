@@ -15,8 +15,8 @@ interface LisitingInfoProps {
     guestCount : number
     bathroomCount : number
     category : {
+        label : string
         icon : IconType
-        type : string
         description : string
     } | undefined
     locationValue : string
