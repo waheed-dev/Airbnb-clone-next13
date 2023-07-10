@@ -72,7 +72,7 @@ export default async function getListings(params: IListingsParams) {
     }
     return await prismaDb.listing.findMany({
       where: query,
-      orderBy: {
+      orderBy:{
         createdAt: "desc",
       },
     });

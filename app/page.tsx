@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import Image from "next/image";
 import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
