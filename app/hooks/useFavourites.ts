@@ -35,12 +35,12 @@ const useFavourite = ({ listingId, currentUser }: IUseFavourite) => {
         } else {
           request = () => axios.post(`/api/favourites/${listingId}`);
         }
-
         await request();
         router.refresh();
         toast.success("Success");
-      } catch (error) {
-        toast.error("Something went wrong.");
+      } catch (error : any) {
+        console.log(error)
+        toast.error(error);
       }
     },
     [currentUser, hasFavorited, listingId, router]
