@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import useCountries from "@/app/hooks/useCountries";
 import { format } from "date-fns";
 import Image from "next/image";
-import HeartButton from "@/app/components/HeartButton";
 import Button from "@/app/components/Button";
 
 interface ListingsCardProps {
